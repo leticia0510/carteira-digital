@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.avanade.carteiradigital"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -19,6 +19,29 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            manifestPlaceholders["appLabel"] = "Carteira Digital (DEV)"
+            buildConfigField("String", "ENVIRONMENT", "\"dev\"")
+        }
+        create("stg") {
+            dimension = "environment"
+            applicationIdSuffix = ".stg"
+            versionNameSuffix = "-stg"
+            manifestPlaceholders["appLabel"] = "Carteira Digital (STG)"
+            buildConfigField("String", "ENVIRONMENT", "\"stg\"")
+        }
+        create("prod") {
+            dimension = "environment"
+            manifestPlaceholders["appLabel"] = "@string/app_name"
+            buildConfigField("String", "ENVIRONMENT", "\"prod\"")
+        }
     }
 
     buildTypes {
@@ -34,6 +57,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

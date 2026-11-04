@@ -19,6 +19,19 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.avanade.carteiradigital", appContext.packageName)
+        assertEquals(BuildConfig.APPLICATION_ID, appContext.packageName)
+    }
+
+    @Test
+    fun appLabelMatchesEnvironment() {
+        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        val expectedLabel = when (BuildConfig.ENVIRONMENT) {
+            "dev" -> "Carteira Digital (DEV)"
+            "stg" -> "Carteira Digital (STG)"
+            "prod" -> "Carteira Digital"
+            else -> error("Unknown environment: ${BuildConfig.ENVIRONMENT}")
+        }
+        val actualLabel = appContext.applicationInfo.loadLabel(appContext.packageManager).toString()
+        assertEquals(expectedLabel, actualLabel)
     }
 }
