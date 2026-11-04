@@ -25,5 +25,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Carteira Digital"
 include(":app")
-include(":core:network")
-include(":feature:home")
