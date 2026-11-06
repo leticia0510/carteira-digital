@@ -1,0 +1,184 @@
+
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+P O N T O   D E   P A R T I D A
+Protótipo
+Visual da Carteira Digital, cobrindo as principais jornadas do treinamento:
+MISSÃO
+• Splash e onboarding
+• Login, cadastro e recuperação de senha
+• Home e extrato
+• Transferência, confirmação e comprovante
+• Pagamento por QR Code
+• Agendamentos
+• Gastos por categoria
+• Notificações
+• Perfil e configurações
+2
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+P O N T O   D E   P A R T I D A
+Objetivo e resultado esperado
+Uma jornada intensiva, prática e orientada a evidências de engenharia.
+MISSÃO
+Construir uma carteira digital simulada com arquitetura 
+multimódulo, operação offline, segurança, testes e 
+pipeline de entrega.
+O foco não é apenas “funcionar”: a solução precisa ser 
+explicável, sustentável e resiliente.
+COMPETÊNCIAS
+Clean Architecture
+MVI / fluxo unidirecional
+Room + WorkManager
+Keystore + biometria
+EVIDÊNCIAS
+Código e pull requests
+Testes e cobertura de 50%
+Pipeline e APK (Utilizar do firebase)
+Demonstração técnica
+3
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+P R O D U T O
+Escopo funcional da carteira digital
+API mockada e dados fictícios, sem integração bancária real.
+Acesso
+Login, sessão segura, logout e biometria
+Conta
+Saldo, atalhos e últimas transações
+Extrato
+Paginação, busca, filtros e detalhes
+Transferência
+Validações, confirmação e comprovante
+Pagamentos
+QR simulado, agendamento e cancelamento
+Engenharia
+Offline, sincronização, testes e CI/CD
+DESAFIO CENTRAL Uma operação nunca pode ser duplicada, mesmo com timeout, perda de conexão ou retomada do aplicativo.
+4
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+F U N D A Ç Ã O   T É C N I C A
+Arquitetura e regras do projeto
+Evolução da modularização da Fase 2 para contratos e dependências explícitas.
+CAMADAS
+Presentation → Domain → Data
+ESTADO
+StateFlow, UI State imutável, Events e Effects
+REGRAS
+Domain sem Android Framework
+UI sem acesso direto a Retrofit ou Room
+DTO, Entity e Domain Model separados
+5
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+P L A N O   D E   E X E C U Ç Ã O
+Roadmap de 6 semanas
+Cada semana combina estudo dirigido, laboratório, code review e review técnica.
+01 Fundação Planejamento, módulos, build logic, flavors e pipeline inicial
+02 Arquitetura + UI Clean Architecture, MVI, Design System e acessibilidade
+03 Dados + offline API, Room, cache, paginação e fonte de verdade
+04 Operações seguras Transferência, biometria, idempotência e WorkManager
+05 Qualidade + entrega Testes, análise estática, CI/CD e observabilidade
+06 Hardening Cenários de falha, documentação, APK e defesa técnica
+6
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+S E M A N A S   1   E   2
+Fundação, arquitetura e experiência
+Entregar cedo uma base compilável, navegável e protegida por regras claras.
+SEMANA 1 • FUNDAÇÃO
+Objetivos
+• Refinar backlog e critérios de aceite
+• Criar módulos, convention plugins e catálogo de versões
+• Configurar dev, stg e prod
+• Iniciar pipeline: build, lint e testes
+Entregáveis
+• README, backlog e diagrama
+• ADR 001: arquitetura
+• Projeto compilando nos três ambientes
+SEMANA 2 • ARQUITETURA + UI
+Objetivos
+• Implementar Presentation, Domain e Data
+• Definir UI State, Events e Effects
+• Criar Design System e navegação tipada
+• Desenvolver autenticação e home inicial
+Entregáveis
+• Primeira feature vertical
+• Componentes com previews
+• Testes de Use Case e ViewModel
+7
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+S E M A N A S   3   E   4
+Offline first, sincronização e segurança
+Concentrar a maior complexidade nos fluxos de dados e nas operações críticas.
+SEMANA 3 • DADOS
+Retrofit + OkHttp
+DTO, Entity e Domain Model
+Extrato paginado
+Room e DataStore
+Cache e expiração
+Indicador de dado desatualizado
+Testes de repository e banco
+SEMANA 4 • OPERAÇÕES
+Transferência simulada
+Keystore e biometria
+Idempotency key
+Fila persistida
+WorkManager e retry
+Estados pendente / concluído / falhou
+Teste de perda de conexão
+8
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+S E M A N A S   5   E   6
+Qualidade, automação e defesa técnica
+Transformar critérios subjetivos em gates verificáveis de entrega.
+SEMANA 5 • QUALIDADE
+Testes unitários e de integração
+Testes de Compose
+Detekt e Android Lint
+Relatório de cobertura
+Crashlytics e Analytics
+Pipeline com geração de APK
+Proteção de branch
+SEMANA 6 • HARDENING
+API indisponível
+Sessão expirada
+Cache vazio ou antigo
+Timeout sem duplicidade
+Retorno da conexão
+Revisão de segurança e acessibilidade
+Correção de débitos técnicos
+9
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+D I N Â M I C A
+Responsabilidades e acompanhamento
+Ambos implementam, revisam, testam, documentam e apresentam.
+LEONARDO • CICLO 1
+Arquitetura, autenticação e domínio. Revisa dados e 
+Design System.
+RAFAEL • CICLO 1
+Design System, integração, banco local e extrato. 
+Revisa arquitetura.
+TROCA • CICLO 2
+Responsabilidades invertidas nas semanas 4 a 6 para 
+ampliar autonomia.
+R I T U A L   S E M A N A L
+1 Estudo dirigido 2 Laboratório 3 Pull request 4 Code review 5 Review técnica
+Check-in: concluído • bloqueios • decisão técnica • aprendizado • débito • próxima demonstração
+10
+FORMAÇÃO MOBILE • FASE 3 Plano de treinamento Android avançado
+C R I T É R I O S   D E   S A Í D A
+Avaliação e Definition of Done
+A entrega é medida pelo produto e pela forma como a solução foi construída.
+Arquitetura 20%
+Código 15%
+Offline + sync 15%
+Segurança 15%
+Testes 15%
+CI/CD 10%
+Docs + defesa 10%
+DEFINITION OF DONE
+Critérios de aceite atendidos
+Estados de loading, sucesso, vazio e erro
+Offline tratado quando aplicável
+Testes e análise estática aprovados
+Sem exposição de dados sensíveis
+Acessibilidade básica
+Code review concluído
+Documentação e demonstração atualizadas
+RESULTADO FINAL: código-fonte + APK + README + diagramas + ADRs + cobertura + pipeline + apresentação
