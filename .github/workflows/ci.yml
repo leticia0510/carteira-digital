@@ -1,38 +1,71 @@
-name: Exemplo de CI # Nome da ação
+
+name: Android CI
 
 on:
   pull_request:
     branches:
       - main
       - development
-    types: [ opened, reopened ]
+    types: [opened, reopened, synchronize]
 
-jobs: # Trabalhos a serem executados
+jobs:
   build:
-  # Nome do trabalho pode ser qualquer um de sua escolha
-    runs-on: ubuntu-latest # Sistema operacional a ser utilizado
-    steps: # Passos a serem executados
-      - name: Checkout code # Nome do passo, nesse caso, clonar o repositório
-        uses: actions/checkout@v4 # action escolhida para clonar o repositório
-
-      - name: Set up JDK 21 # Nome do passo, nesse caso, configurar o JDK 21
-        uses: actions/setup-java@v4 # action escolhida para configurar o JDK
-        with: # Configurações da action
-          distribution: 'temurin' # Distribuição do JDK
-          java-version: '21' # Versão do JDK
-
-      - name: Build with Maven # Nome do passo, nesse caso, buildar com Maven
-        run: mvn -B package -DskipTests # Comando a ser executado
-  test:
+    name: Build Android
     runs-on: ubuntu-latest
-    needs: build
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up JDK 21
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
-      - name: Test with Maven
-        run: mvn test
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 37.1
+        run: |
+          sdkmanager "platforms;android-37.1" "build-tools;37.0.0"
+          yes | sdkmanager --licenses
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build DEV, STG and PROD
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDevDebug assembleStgDebug assembleProdDebug
+
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 37.1
+        run: |
+          sdkmanager "platforms;android-37.1" "build-tools;37.0.0"
+          yes | sdkmanager --licenses
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run Unit Tests
+        run: |
+          chmod +x gradlew
+          ./gradlew testDevDebugUnitTest testStgDebugUnitTest testProdDebugUnitTest
