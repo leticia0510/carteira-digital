@@ -75,8 +75,11 @@ jobs:
     needs: build
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Check SDK Manager
+        run: |
+          ls -la /usr/local/lib/android/sdk/cmdline-tools/
+          ls -la /usr/local/lib/android/sdk/cmdline-tools/16.0/bin/
+          which sdkmanager
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
