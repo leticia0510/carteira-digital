@@ -78,7 +78,7 @@ jobs:
       - name: Check SDK Manager
         run: |
           ls -la /usr/local/lib/android/sdk/cmdline-tools/
-          ls -la /usr/local/lib/android/sdk/cmdline-tools/16.0/bin/
+          ls -la /usr/local/lib/android/sdk/cmdline-tools/latest/bin/
           which sdkmanager
 
       - name: Set up JDK 17
@@ -86,12 +86,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-
+      
       - name: Setup Android SDK
         run: |
           echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
-          echo "/usr/local/lib/android/sdk/cmdline-tools/16.0/bin" >> $GITHUB_PATH
+          echo "/usr/local/lib/android/sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
           echo "/usr/local/lib/android/sdk/platform-tools" >> $GITHUB_PATH
       
       - name: Install Android SDK
