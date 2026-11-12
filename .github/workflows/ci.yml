@@ -59,6 +59,7 @@ jobs:
             assembleDevDebug \
             assembleStgDebug \
             assembleProdDebug \
+            --max-workers=2 \
             --stacktrace
 
       - name: Diagnose Android SDK
