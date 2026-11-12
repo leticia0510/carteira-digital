@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Carteira Digital</string>
+    <string name="mais_controle">Mais controle para o seu dia a dia.</string>
+    <string name="comecar">Começar</string>
+    <string name="ja_tem_uma_conta">Já tem uma conta?</string>
+    <string name="entrar">Entrar</string>
+    <string name="que_bom">Que bom te ver por aqui!!</string>
+    <string name="saldo_conta">Saldo da conta</string>
+    <string name="area_pix">Área PIX</string>
+    <string name="pix">Pix</string>
+    <string name="transferir">Transferir</string>
+    <string name="area_transferencia">Área de transferência</string>
+    <string name="area_pagamento">Área de pagamento</string>
+    <string name="pagar">Pagar</string>
+    <string name="qr_code">QR Code</string>
+    <string name="ultimas_transacoes">Últimas transações</string>
+    <string name="ver_todas">Ver todas</string>
 </resources>
