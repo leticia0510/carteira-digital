@@ -1,4 +1,3 @@
-
 name: Android CI
 
 on:
@@ -41,12 +40,20 @@ jobs:
           echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
           echo "/usr/local/lib/android/sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
           echo "/usr/local/lib/android/sdk/platform-tools" >> $GITHUB_PATH
-        
+
+      - name: Diagnose Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+          ls -la "$ANDROID_HOME/cmdline-tools/latest/bin/"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --version
+
       - name: Install Android SDK
         run: |
-          sdkmanager --licenses
-          sdkmanager "platforms;android-37.1" "build-tools;37.0.0"
-            
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKMANAGER" --licenses
+          "$SDKMANAGER" "platforms;android-37.1" "build-tools;37.0.0"
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
@@ -62,42 +69,39 @@ jobs:
             --max-workers=2 \
             --stacktrace
 
-      - name: Diagnose Android SDK
-        run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
-          ls -la /usr/local/lib/android/sdk/cmdline-tools/
-          find /usr/local/lib/android/sdk -name sdkmanager
-
   test:
     name: Unit Tests (DEV, STG, PROD)
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Check SDK Manager
-        run: |
-          ls -la /usr/local/lib/android/sdk/cmdline-tools/
-          ls -la /usr/local/lib/android/sdk/cmdline-tools/latest/bin/
-          which sdkmanager
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      
+
       - name: Setup Android SDK
         run: |
           echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
           echo "/usr/local/lib/android/sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
           echo "/usr/local/lib/android/sdk/platform-tools" >> $GITHUB_PATH
-      
+
+      - name: Diagnose Android SDK
+        run: |
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          ls -la "$ANDROID_HOME/cmdline-tools/latest/bin/"
+          "$SDKMANAGER" --version
+
       - name: Install Android SDK
         run: |
-          yes | sdkmanager --licenses
-          sdkmanager "platforms;android-37.1" "build-tools;37.0.0"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKMANAGER" --licenses
+          "$SDKMANAGER" "platforms;android-37.1" "build-tools;37.0.0"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -111,6 +115,7 @@ jobs:
             testDevDebugUnitTest \
             testStgDebugUnitTest \
             testProdDebugUnitTest \
+            --max-workers=2 \
             --stacktrace
 
       - name: Upload test reports
@@ -120,3 +125,4 @@ jobs:
           name: android-unit-test-reports
           path: '**/build/reports/tests/'
           if-no-files-found: ignore
+          
