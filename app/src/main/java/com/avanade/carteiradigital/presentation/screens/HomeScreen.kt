@@ -22,7 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,7 +40,7 @@ fun HomeScreen() {
         modifier = Modifier
             .background(Branco)
             .fillMaxSize()
-            .padding(vertical = 24.dp, horizontal = 24.dp)
+            .padding(dimensionResource(id = R.dimen.vinte_quatro_dp))
     ) {
         item {
             Row(
@@ -48,9 +50,9 @@ fun HomeScreen() {
                     painter = painterResource(id = R.drawable.foto_perfil_f),
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(end = 16.dp)
+                        .padding(end = dimensionResource(id = R.dimen.dezesseis_dp))
                         .size(50.dp)
-                        .clip(RoundedCornerShape(50.dp))
+                        .clip(RoundedCornerShape(48.dp))
                 )
                 Column() {
                     Text(
@@ -58,21 +60,26 @@ fun HomeScreen() {
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp
                     )
-                    Text(text = "Que bom te ver por aqui!")
+                    Text(text = stringResource(id = R.string.que_bom))
                 }
             }
         }
         item {
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.dezesseis_dp)))
 
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(
                             CinzaAzulado,
-                            shape = RoundedCornerShape(16.dp)
+                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.oito_dp))
                         )
-                        .padding(top = 16.dp, bottom = 32.dp, start = 16.dp, end = 16.dp)
+                        .padding(
+                            top = dimensionResource(id = R.dimen.dezesseis_dp),
+                            bottom = dimensionResource(id = R.dimen.trinta_dois_dp),
+                            start = dimensionResource(id = R.dimen.dezesseis_dp),
+                            end = dimensionResource(id = R.dimen.dezesseis_dp)
+                        )
                 ){
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -81,7 +88,7 @@ fun HomeScreen() {
                     ) {
                         Column {
                             Text(
-                                text = "Saldo da conta",
+                                text = stringResource(id = R.string.saldo_conta),
                                 fontSize = 16.sp
                             )
                             Text(
@@ -94,53 +101,53 @@ fun HomeScreen() {
                             painter = painterResource(id = R.drawable.mostrar_senha),
                             contentDescription = null,
                             modifier = Modifier
-                                .padding(start = 16.dp)
+                                .padding(start = dimensionResource(id = R.dimen.dezesseis_dp))
                                 .size(30.dp)
                         )
                     }
                 }
         }
         item {
-            Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.dezesseis_dp)))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 BotaoServico(
                     idImage = R.drawable.pix,
-                    descricao = "Área Pix",
-                    nomeServico = "Pix"
+                    descricao = stringResource(id = R.string.area_pix),
+                    nomeServico = stringResource(id = R.string.pix)
                 )
                 BotaoServico(
                     idImage = R.drawable.transacao,
-                    descricao = "Área Transação",
-                    nomeServico = "Transferir"
+                    descricao = stringResource(id = R.string.area_transferencia),
+                    nomeServico = stringResource(id = R.string.transferir)
                 )
                 BotaoServico(
                     idImage = R.drawable.varredura,
-                    descricao = "Área de pagamento",
-                    nomeServico = "Pgar"
+                    descricao = stringResource(id = R.string.area_pagamento),
+                    nomeServico = stringResource(id = R.string.pagar)
                 )
                 BotaoServico(
                     idImage = R.drawable.codigo_qr,
-                    descricao = "QR Code",
-                    nomeServico = "QR Code"
+                    descricao = stringResource(id = R.string.qr_code),
+                    nomeServico = stringResource(id = R.string.qr_code)
                 )
             }
         }
         item {
-            Spacer(modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.vinte_quatro_dp)))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Últimas transações",
+                    text = stringResource(id = R.string.ultimas_transacoes),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
                 Text(
-                    text = "Ver todas",
+                    text = stringResource(id = R.string.ver_todas),
                     fontSize = 16.sp,
                     color = Color.Blue
                 )
@@ -194,10 +201,10 @@ fun BotaoServico(
         modifier = Modifier
             .background(
                 CinzaAzulado,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.oito_dp))
             )
-            .width(72.dp)
-            .padding(vertical = 16.dp)
+            .width(dimensionResource(id = R.dimen.setenta_dois_dp))
+            .padding(vertical = dimensionResource(id = R.dimen.dezesseis_dp))
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -208,9 +215,9 @@ fun BotaoServico(
                 painter = painterResource(id = idImage),
                 contentDescription = descricao,
                 modifier = Modifier
-                    .size(24.dp)
+                    .size(dimensionResource(id = R.dimen.vinte_quatro_dp))
             )
-            Spacer(modifier = Modifier.size(8.dp))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.oito_dp)))
             Text(
                 text = nomeServico,
                 fontSize = 12.sp,
