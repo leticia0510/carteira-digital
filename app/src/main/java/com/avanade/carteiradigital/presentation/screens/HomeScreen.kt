@@ -2,7 +2,7 @@ package com.avanade.carteiradigital.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -40,75 +39,17 @@ fun HomeScreen() {
         modifier = Modifier
             .background(Branco)
             .fillMaxSize()
-            .padding(dimensionResource(id = R.dimen.vinte_quatro_dp))
+            .padding(dimensionResource(id = R.dimen.spacing_large))
     ) {
         item {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.foto_perfil_f),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(end = dimensionResource(id = R.dimen.dezesseis_dp))
-                        .size(50.dp)
-                        .clip(RoundedCornerShape(48.dp))
-                )
-                Column() {
-                    Text(
-                        text = "Olá, Miranda!",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
-                    Text(text = stringResource(id = R.string.que_bom))
-                }
-            }
+            CabecalhoHome()
         }
         item {
-            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.dezesseis_dp)))
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            CinzaAzulado,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.oito_dp))
-                        )
-                        .padding(
-                            top = dimensionResource(id = R.dimen.dezesseis_dp),
-                            bottom = dimensionResource(id = R.dimen.trinta_dois_dp),
-                            start = dimensionResource(id = R.dimen.dezesseis_dp),
-                            end = dimensionResource(id = R.dimen.dezesseis_dp)
-                        )
-                ){
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column {
-                            Text(
-                                text = stringResource(id = R.string.saldo_conta),
-                                fontSize = 16.sp
-                            )
-                            Text(
-                                text = "R$ 100,00",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 24.sp
-                            )
-                        }
-                        Image(
-                            painter = painterResource(id = R.drawable.mostrar_senha),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(start = dimensionResource(id = R.dimen.dezesseis_dp))
-                                .size(30.dp)
-                        )
-                    }
-                }
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacing_medium)))
+            BoxSaldo()
         }
         item {
-            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.dezesseis_dp)))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacing_medium)))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -136,7 +77,7 @@ fun HomeScreen() {
             }
         }
         item {
-            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.vinte_quatro_dp)))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacing_large)))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -144,11 +85,11 @@ fun HomeScreen() {
                 Text(
                     text = stringResource(id = R.string.ultimas_transacoes),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
                 )
                 Text(
                     text = stringResource(id = R.string.ver_todas),
-                    fontSize = 16.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
                     color = Color.Blue
                 )
             }
@@ -186,7 +127,6 @@ fun HomeScreen() {
                     valor = "89,90"
                 )
             }
-
         }
     }
 }
@@ -196,15 +136,15 @@ fun BotaoServico(
     idImage: Int,
     descricao: String,
     nomeServico: String,
-){
+) {
     Box(
         modifier = Modifier
             .background(
                 CinzaAzulado,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.oito_dp))
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small))
             )
-            .width(dimensionResource(id = R.dimen.setenta_dois_dp))
-            .padding(vertical = dimensionResource(id = R.dimen.dezesseis_dp))
+            .width(dimensionResource(id = R.dimen.spacing_2x_large))
+            .padding(vertical = dimensionResource(id = R.dimen.spacing_medium))
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -215,12 +155,12 @@ fun BotaoServico(
                 painter = painterResource(id = idImage),
                 contentDescription = descricao,
                 modifier = Modifier
-                    .size(dimensionResource(id = R.dimen.vinte_quatro_dp))
+                    .size(dimensionResource(id = R.dimen.spacing_large))
             )
-            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.oito_dp)))
+            Spacer(modifier = Modifier.size(dimensionResource(id = R.dimen.spacing_small)))
             Text(
                 text = nomeServico,
-                fontSize = 12.sp,
+                fontSize = dimensionResource(id = R.dimen.text_size_small).value.sp,
                 fontWeight = FontWeight.SemiBold
             )
         }
@@ -235,7 +175,7 @@ fun CardTransacao(
     data: String,
     hora: String,
     valor: String
-){
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -252,14 +192,13 @@ fun CardTransacao(
                 )
                 .padding(16.dp)
                 .size(24.dp)
-
         )
         Spacer(modifier = Modifier.width(8.dp))
         Column() {
             Text(
                 text = nomeServico,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
+                fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
             )
             Row() {
                 Text(
@@ -276,11 +215,78 @@ fun CardTransacao(
         Text(
             text = "- R$ $valor",
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
+            fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
             textAlign = TextAlign.End,
             modifier = Modifier
                 .fillMaxWidth()
         )
+    }
+}
+
+@Composable
+fun CabecalhoHome() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.foto_perfil_f),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(end = dimensionResource(id = R.dimen.spacing_medium))
+                .size(50.dp)
+                .clip(RoundedCornerShape(48.dp))
+        )
+        Column() {
+            Text(
+                text = "Olá, Miranda!",
+                fontWeight = FontWeight.Bold,
+                fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
+            )
+            Text(text = stringResource(id = R.string.que_bom))
+        }
+    }
+}
+
+@Composable
+fun BoxSaldo() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                CinzaAzulado,
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small))
+            )
+            .padding(
+                top = dimensionResource(id = R.dimen.spacing_medium),
+                bottom = dimensionResource(id = R.dimen.spacing_extra_large),
+                start = dimensionResource(id = R.dimen.spacing_medium),
+                end = dimensionResource(id = R.dimen.spacing_medium)
+            )
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column {
+                Text(
+                    text = stringResource(id = R.string.saldo_conta),
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
+                )
+                Text(
+                    text = "R$ 100,00",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = dimensionResource(id = R.dimen.text_size_2x_large).value.sp
+                )
+            }
+            Image(
+                painter = painterResource(id = R.drawable.mostrar_senha),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(start = dimensionResource(id = R.dimen.spacing_medium))
+                    .size(30.dp)
+            )
+        }
     }
 }
 
