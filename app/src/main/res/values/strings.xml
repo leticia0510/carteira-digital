@@ -24,4 +24,15 @@
     <string name="entrar_com_biometria">Entrar com biometria</string>
     <string name="nao_tem_conta">Não tem uma conta?</string>
     <string name="cadastre_se">Cadastre-se</string>
+    <string name="criar_sua_conta">Criar sua conta</string>
+    <string name="e_rapido">É rápido e seguro.</string>
+    <string name="nome_completo">Nome completo</string>
+    <string name="seu_nome">Seu nome</string>
+    <string name="seu_email">seu@email.com</string>
+    <string name="minimo_8_caracteres">Mínimo de 8 caracteres</string>
+    <string name="letra_maiuscula">Letra maiúscula</string>
+    <string name="letra_minuscula">Letra minúscula</string>
+    <string name="numero">Número</string>
+    <string name="caractere_especial">Caractere especial</string>
+    <string name="cadastrar">Cadastrar</string>
 </resources>

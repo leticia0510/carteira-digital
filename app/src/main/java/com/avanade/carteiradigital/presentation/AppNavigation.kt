@@ -25,6 +25,7 @@ import com.avanade.carteiradigital.presentation.screens.CadastroScreen
 import com.avanade.carteiradigital.presentation.screens.ExtratoScreen
 import com.avanade.carteiradigital.presentation.screens.HomeScreen
 import com.avanade.carteiradigital.presentation.screens.LoginScreen
+import com.avanade.carteiradigital.presentation.screens.SplashScreen
 import kotlinx.serialization.Serializable
 import kotlin.collections.forEach
 
@@ -36,6 +37,9 @@ data class BottomNavItem<T : Any>(
 
 @Serializable
 sealed class Screen{
+
+    @Serializable
+    object Splash : Screen()
 
     @Serializable
     object Login : Screen()
@@ -87,9 +91,13 @@ fun AppNavigation() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home,
+            startDestination = Screen.Splash,
             modifier = Modifier.padding(innerPadding)
         ) {
+
+            composable<Screen.Splash> {
+                SplashScreen(navController)
+            }
 
             composable<Screen.Login> {
                 LoginScreen()

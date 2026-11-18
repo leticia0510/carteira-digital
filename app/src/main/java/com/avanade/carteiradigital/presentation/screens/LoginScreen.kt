@@ -17,8 +17,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -36,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
+import com.avanade.carteiradigital.presentation.component.InputPadrao
 import com.avanade.carteiradigital.presentation.component.LinkLaranja
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.CinzaAzulado
@@ -49,7 +53,7 @@ fun LoginScreen() {
             .padding(dimensionResource(id = R.dimen.spacing_medium))
     ) {
         item {
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_4x_large)))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
             CabecalhoLogin()
         }
         item {
@@ -68,6 +72,11 @@ fun LoginScreen() {
 @Composable
 fun CabecalhoLogin() {
     Column() {
+        Icon(
+            imageVector = Icons.Default.ArrowBackIosNew,
+            contentDescription = "Voltar",
+        )
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_extra_large)))
         Text(
             text = stringResource(id = R.string.bem_vindo_volta),
             fontWeight = FontWeight.Bold,
@@ -83,60 +92,20 @@ fun CabecalhoLogin() {
 
 @Composable
 fun AcessoUsuario() {
-    Text(
-        text = stringResource(id = R.string.email),
-        fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
-        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.spacing_small))
-    )
-    TextField(
+    InputPadrao(
+        label = stringResource(id = R.string.email),
+        modifier = Modifier,
+        placeholder = stringResource(id = R.string.email),
         value = "",
-        onValueChange = {},
-        placeholder = { Text(text = stringResource(id = R.string.email)) },
-        modifier = Modifier
-            .fillMaxSize()
-            .border(
-                width = 2.dp,
-                color = CinzaAzulado,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_medium))
-            )
-            .background(
-                Color.White.copy(alpha = 0.4f),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_medium))
-            ),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
+        onValueChange = {}
     )
     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
-    Text(
-        text = stringResource(id = R.string.senha),
-        fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
-        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.spacing_small))
-    )
-    TextField(
+    InputPadrao(
+        label = stringResource(id = R.string.senha),
+        modifier = Modifier,
+        placeholder = stringResource(id = R.string.senha),
         value = "",
-        onValueChange = {},
-        placeholder = { Text(text = stringResource(id = R.string.senha)) },
-        modifier = Modifier
-            .fillMaxSize()
-            .border(
-                width = 2.dp,
-                color = CinzaAzulado,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_medium))
-            )
-            .background(
-                Color.White.copy(alpha = 0.4f),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_medium))
-            ),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        )
+        onValueChange = {}
     )
     Text(
         text = stringResource(id = R.string.esqueceu_senha),
@@ -150,6 +119,7 @@ fun AcessoUsuario() {
     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
     BotaoLaranja(
         onClick = { /* Ação ao clicar no botão */ },
+        modifier = Modifier,
         text = stringResource(id = R.string.entrar)
     )
 }
@@ -183,7 +153,7 @@ fun OutraOpcaoEntrada() {
                 contentDescription = null,
                 modifier = Modifier
                     .padding(end = dimensionResource(id = R.dimen.spacing_small))
-                    .size(32.dp)
+                    .size(dimensionResource(id = R.dimen.icon_size_large))
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.spacing_small)))
             Text(
@@ -208,6 +178,7 @@ fun LinkParaCadastro() {
         )
         LinkLaranja(
             onClick = { /* Ação ao clicar no link */ },
+            modifier = Modifier,
             text = stringResource(id = R.string.cadastre_se)
         )
     }

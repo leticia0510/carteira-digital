@@ -14,6 +14,7 @@ import com.avanade.carteiradigital.ui.theme.Laranja
 @Composable
 fun LinkLaranja(
     onClick: () -> Unit,
+    modifier: Modifier,
     text: String
 ) {
     Text(
@@ -22,6 +23,8 @@ fun LinkLaranja(
         fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
         fontWeight = FontWeight.Bold,
         textDecoration = TextDecoration.Underline,
-        modifier = Modifier.clickable(onClick = onClick)
+        modifier = Modifier
+            .clickable(onClick = onClick)
+            .then(modifier)
     )
 }
