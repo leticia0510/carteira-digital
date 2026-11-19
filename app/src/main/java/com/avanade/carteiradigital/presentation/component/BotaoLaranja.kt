@@ -27,10 +27,9 @@ fun BotaoLaranja(
             containerColor = Laranja
         ),
         contentPadding = PaddingValues(dimensionResource(id = R.dimen.spacing_medium)),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(top = dimensionResource(id = R.dimen.spacing_medium))
-            .then(modifier),
+            .padding(top = dimensionResource(id = R.dimen.spacing_medium)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small)),
 
         ) {

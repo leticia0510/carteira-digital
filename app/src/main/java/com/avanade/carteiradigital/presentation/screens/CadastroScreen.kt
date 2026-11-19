@@ -156,7 +156,7 @@ fun CheckSenha(
             imageVector = Icons.Default.Check,
             contentDescription = "Confirmar",
             modifier = Modifier
-                .size(20.dp)
+                .size(dimensionResource(R.dimen.icon_size_medium))
         )
         Text(
             text = texto,

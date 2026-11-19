@@ -13,3 +13,5 @@ val Pink40 = Color(0xFF7D5260)
 val Laranja = Color(0xFFFC5003)
 val CinzaAzulado = Color(0xFFEAEFF5)
 val Branco = Color(0xFFFFFFFF)
+
+val BrancoAzulado = Color(0xFFE8E8F7)
