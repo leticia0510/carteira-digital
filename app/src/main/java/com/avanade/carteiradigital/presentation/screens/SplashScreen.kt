@@ -69,7 +69,7 @@ fun IntroducaoSplash() {
             modifier = Modifier
                 .size(
                     width = dimensionResource(id = R.dimen.logo_nome_avanade_width),
-                    height = dimensionResource(id = R.dimen.logo_nome_avanade_height)
+                    height = dimensionResource(id = R.dimen.logo_medium)
                 )
         )
         Text(

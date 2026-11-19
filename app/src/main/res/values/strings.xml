@@ -39,4 +39,9 @@
     <string name="informe_email">Informe seu e-mail para receber as instruções</string>
     <string name="enviar_instrucoes">Enviar instruções</string>
     <string name="voltar_para_login">Voltar para o login</string>
+    <string name="extrato">Extrato</string>
+    <string name="buscar_transacoes">Buscar transações</string>
+    <string name="todos">Todos</string>
+    <string name="entradas">Entradas</string>
+    <string name="saidas">Saídas</string>
 </resources>
