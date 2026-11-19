@@ -35,4 +35,8 @@
     <string name="numero">Número</string>
     <string name="caractere_especial">Caractere especial</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="recuperar_senha">Recuperar senha</string>
+    <string name="informe_email">Informe seu e-mail para receber as instruções</string>
+    <string name="enviar_instrucoes">Enviar instruções</string>
+    <string name="voltar_para_login">Voltar para o login</string>
 </resources>

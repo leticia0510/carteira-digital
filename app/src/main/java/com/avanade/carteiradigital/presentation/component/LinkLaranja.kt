@@ -23,8 +23,7 @@ fun LinkLaranja(
         fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
         fontWeight = FontWeight.Bold,
         textDecoration = TextDecoration.Underline,
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = onClick)
-            .then(modifier)
     )
 }
