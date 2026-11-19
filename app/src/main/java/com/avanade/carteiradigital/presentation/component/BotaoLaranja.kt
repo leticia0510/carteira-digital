@@ -18,6 +18,7 @@ import com.avanade.carteiradigital.ui.theme.Laranja
 @Composable
 fun BotaoLaranja(
     onClick: () -> Unit,
+    modifier: Modifier,
     text: String
 ) {
     Button(
@@ -28,7 +29,8 @@ fun BotaoLaranja(
         contentPadding = PaddingValues(dimensionResource(id = R.dimen.spacing_medium)),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = dimensionResource(id = R.dimen.spacing_medium)),
+            .padding(top = dimensionResource(id = R.dimen.spacing_medium))
+            .then(modifier),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small)),
 
         ) {

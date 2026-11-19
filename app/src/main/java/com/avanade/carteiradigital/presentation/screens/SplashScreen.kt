@@ -23,13 +23,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.avanade.carteiradigital.R
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
 import com.avanade.carteiradigital.presentation.component.LinkLaranja
 import com.avanade.carteiradigital.ui.theme.Branco
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.tela_de_fundo),
@@ -65,7 +67,10 @@ fun IntroducaoSplash() {
             painter = painterResource(id = R.drawable.logo_nome_avanade),
             contentDescription = null,
             modifier = Modifier
-                .size(width = 140.dp, height = 50.dp)
+                .size(
+                    width = dimensionResource(id = R.dimen.logo_nome_avanade_width),
+                    height = dimensionResource(id = R.dimen.logo_nome_avanade_height)
+                )
         )
         Text(
             text = stringResource(id = R.string.app_name),
@@ -99,6 +104,7 @@ fun DirecaoSplash() {
     ) {
         BotaoLaranja(
             onClick = { /* Ação ao clicar no botão */ },
+            modifier = Modifier,
             text = stringResource(id = R.string.comecar)
         )
         Row(
@@ -115,6 +121,7 @@ fun DirecaoSplash() {
             )
             LinkLaranja(
                 onClick = { /* Ação ao clicar no link */ },
+                modifier = Modifier,
                 text = stringResource(id = R.string.entrar)
             )
         }
@@ -124,5 +131,5 @@ fun DirecaoSplash() {
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreen(navController = rememberNavController())
 }
