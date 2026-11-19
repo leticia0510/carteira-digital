@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
+import com.avanade.carteiradigital.presentation.component.CardTransacao
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.CinzaAzulado
 
@@ -168,62 +169,6 @@ fun BotaoServico(
 }
 
 @Composable
-fun CardTransacao(
-    idImage: Int,
-    descricao: String,
-    nomeServico: String,
-    data: String,
-    hora: String,
-    valor: String
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 16.dp)
-    ) {
-        Image(
-            painter = painterResource(id = idImage),
-            contentDescription = descricao,
-            modifier = Modifier
-                .background(
-                    Color.Blue,
-                    shape = RoundedCornerShape(32.dp)
-                )
-                .padding(16.dp)
-                .size(24.dp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Column() {
-            Text(
-                text = nomeServico,
-                fontWeight = FontWeight.Bold,
-                fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
-            )
-            Row() {
-                Text(
-                    text = data
-                )
-                Text(
-                    text = " - "
-                )
-                Text(
-                    text = hora
-                )
-            }
-        }
-        Text(
-            text = "- R$ $valor",
-            fontWeight = FontWeight.Bold,
-            fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
-            textAlign = TextAlign.End,
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-    }
-}
-
-@Composable
 fun CabecalhoHome() {
     Row(
         verticalAlignment = Alignment.CenterVertically
@@ -233,8 +178,8 @@ fun CabecalhoHome() {
             contentDescription = null,
             modifier = Modifier
                 .padding(end = dimensionResource(id = R.dimen.spacing_medium))
-                .size(50.dp)
-                .clip(RoundedCornerShape(48.dp))
+                .size(dimensionResource(id = R.dimen.logo_medium))
+                .clip(RoundedCornerShape(dimensionResource(id = R.dimen.spacing_extra_large)))
         )
         Column() {
             Text(
@@ -284,7 +229,7 @@ fun BoxSaldo() {
                 contentDescription = null,
                 modifier = Modifier
                     .padding(start = dimensionResource(id = R.dimen.spacing_medium))
-                    .size(30.dp)
+                    .size(dimensionResource(id = R.dimen.icon_size_large))
             )
         }
     }
