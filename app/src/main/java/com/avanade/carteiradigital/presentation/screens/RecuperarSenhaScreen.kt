@@ -77,7 +77,7 @@ fun BoxRecuperarSenha() {
             Image(
                 painter = painterResource(id = R.drawable.envelope),
                 contentDescription = "Envenlope",
-                modifier = Modifier.size(dimensionResource(id = R.dimen.logo_nome_avanade_height))
+                modifier = Modifier.size(dimensionResource(id = R.dimen.logo_medium))
             )
         }
         Text(
