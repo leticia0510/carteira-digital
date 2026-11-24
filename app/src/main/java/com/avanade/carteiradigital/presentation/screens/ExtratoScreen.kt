@@ -37,8 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
 import com.avanade.carteiradigital.presentation.component.CardTransacao
+import com.avanade.carteiradigital.presentation.component.listaTransacoes
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.CinzaAzulado
+import com.avanade.carteiradigital.ui.theme.Preto
 
 @Composable
 fun ExtratoScreen() {
@@ -65,64 +67,21 @@ fun ExtratoScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                 ) {
-                Box(
-                    modifier = Modifier
-                        .border(
-                            width = dimensionResource(id = R.dimen.spacing_tiny),
-                            color = CinzaAzulado,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_large))
-                        )
-                        .background(
-                            Color.Black,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_large))
-                        )
-                        .padding(horizontal = dimensionResource(id = R.dimen.spacing_large), vertical = dimensionResource(id = R.dimen.spacing_medium)),
-                ){
-                    Text(
-                        text = stringResource(id = R.string.todos),
-                        textAlign = TextAlign.Center,
-                        fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
-                        color = Color.White
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .border(
-                            width = dimensionResource(id = R.dimen.spacing_tiny),
-                            color = CinzaAzulado,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_large))
-                        )
-                        .background(
-                            CinzaAzulado,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_large))
-                        )
-                        .padding(horizontal = dimensionResource(id = R.dimen.spacing_large), vertical = dimensionResource(id = R.dimen.spacing_medium)),
-                ){
-                    Text(
-                        text = stringResource(id = R.string.entradas),
-                        textAlign = TextAlign.Center,
-                        fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .border(
-                            width = dimensionResource(id = R.dimen.spacing_tiny),
-                            color = CinzaAzulado,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_large))
-                        )
-                        .background(
-                            CinzaAzulado,
-                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_large))
-                        )
-                        .padding(horizontal = dimensionResource(id = R.dimen.spacing_large), vertical = dimensionResource(id = R.dimen.spacing_medium)),
-                ){
-                    Text(
-                        text = stringResource(id = R.string.saidas),
-                        textAlign = TextAlign.Center,
-                        fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
-                    )
-                }
+                FiltroItem(
+                    texto = stringResource(id = R.string.todos),
+                    corFundo = Preto,
+                    corTexto = Branco
+                )
+                FiltroItem(
+                    texto = stringResource(id = R.string.entradas),
+                    corFundo = CinzaAzulado,
+                    corTexto = Preto
+                )
+                FiltroItem(
+                    texto = stringResource(id = R.string.saidas),
+                    corFundo = CinzaAzulado,
+                    corTexto = Preto
+                )
             }
         }
         item {
@@ -133,38 +92,16 @@ fun ExtratoScreen() {
                 modifier = Modifier.padding(top = dimensionResource(id = R.dimen.spacing_large))
             )
             Column() {
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
+                listaTransacoes.forEach { card ->
+                    CardTransacao(
+                        idImage = card.image,
+                        descricao = card.description,
+                        nomeServico = card.name,
+                        data = card.date,
+                        hora = card.hour,
+                        valor = card.value
+                    )
+                }
             }
         }
     }
@@ -175,7 +112,7 @@ fun ExtratoScreen() {
 fun BoxDeBusca(){
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_small)),
         modifier = Modifier.fillMaxWidth()
     ) {
         TextField(
@@ -212,27 +149,67 @@ fun BoxDeBusca(){
                 unfocusedIndicatorColor = Color.Transparent
             )
         )
-        Button(
-            onClick = { /* Ação ao clicar no botão */ },
-            contentPadding = PaddingValues(0.dp),
+        BotaoDetalhe()
+    }
+}
+
+@Composable
+fun BotaoDetalhe(){
+    Button(
+        onClick = { /* Ação ao clicar no botão */ },
+        contentPadding = PaddingValues(0.dp),
+        modifier = Modifier
+            .width(dimensionResource(id = R.dimen.logo_medium))
+            .height(dimensionResource(id = R.dimen.logo_medium))
+            .background(
+                Color.Transparent),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = Branco
+        )
+    ){
+        Image(
+            painter = painterResource(id = R.drawable.setting),
+            contentDescription = "Filtro",
             modifier = Modifier
-                .width(58.dp)
-                .height(58.dp)
-                .background(
-                    Color.Transparent),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent,
-                contentColor = Color.White
+                .align(Alignment.CenterVertically)
+                .size(dimensionResource(id = R.dimen.icon_size_semi_large))
+        )
+    }
+}
+
+@Composable
+fun FiltroItem(
+    texto: String,
+    corFundo: Color,
+    corTexto: Color = Color.Black
+) {
+    Box(
+        modifier = Modifier
+            .border(
+                width = dimensionResource(id = R.dimen.spacing_tiny),
+                color = CinzaAzulado,
+                shape = RoundedCornerShape(
+                    dimensionResource(id = R.dimen.spacing_large)
+                )
             )
-        ){
-            Image(
-                painter = painterResource(id = R.drawable.setting),
-                contentDescription = "Filtro",
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .size(dimensionResource(id = R.dimen.icon_size_semi_large))
+            .background(
+                corFundo,
+                shape = RoundedCornerShape(
+                    dimensionResource(id = R.dimen.spacing_large)
+                )
             )
-        }
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.spacing_large),
+                vertical = dimensionResource(id = R.dimen.spacing_medium)
+            )
+    ) {
+        Text(
+            text = texto,
+            textAlign = TextAlign.Center,
+            fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
+            color = corTexto
+        )
     }
 }
 

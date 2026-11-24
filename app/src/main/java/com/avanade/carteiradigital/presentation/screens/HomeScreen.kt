@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
 import com.avanade.carteiradigital.presentation.component.CardTransacao
+import com.avanade.carteiradigital.presentation.component.listaTransacoes
+import com.avanade.carteiradigital.ui.theme.Azul
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.CinzaAzulado
 
@@ -91,42 +93,20 @@ fun HomeScreen() {
                 Text(
                     text = stringResource(id = R.string.ver_todas),
                     fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
-                    color = Color.Blue
+                    color = Azul
                 )
             }
             Column() {
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
-                CardTransacao(
-                    idImage = R.drawable.icone_cart,
-                    descricao = "Cart",
-                    nomeServico = "Supermercado",
-                    data = "Hoje",
-                    hora = "10:24",
-                    valor = "89,90"
-                )
+                listaTransacoes.forEach { card ->
+                    CardTransacao(
+                        idImage = card.image,
+                        descricao = card.description,
+                        nomeServico = card.name,
+                        data = card.date,
+                        hora = card.hour,
+                        valor = card.value
+                    )
+                }
             }
         }
     }

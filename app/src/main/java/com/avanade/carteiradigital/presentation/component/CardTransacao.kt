@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
+import com.avanade.carteiradigital.ui.theme.Azul
 
 @Composable
 fun CardTransacao(
@@ -43,7 +44,7 @@ fun CardTransacao(
             contentDescription = descricao,
             modifier = Modifier
                 .background(
-                    Color.Blue,
+                    Azul,
                     shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_extra_large))
                 )
                 .padding(dimensionResource(id = R.dimen.spacing_medium))

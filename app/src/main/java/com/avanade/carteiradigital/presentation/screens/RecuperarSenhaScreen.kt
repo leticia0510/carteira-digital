@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
 import com.avanade.carteiradigital.presentation.component.InputPadrao
+import com.avanade.carteiradigital.ui.theme.Azul
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.BrancoAzulado
 
@@ -115,7 +116,7 @@ fun DadosMaisVoltarRecuperarSenha() {
         Text(
             text = stringResource(id = R.string.voltar_para_login),
             fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
-            color = Color.Blue,
+            color = Azul,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier

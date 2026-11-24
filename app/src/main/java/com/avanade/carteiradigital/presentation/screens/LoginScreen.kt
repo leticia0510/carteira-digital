@@ -50,6 +50,7 @@ import com.avanade.carteiradigital.presentation.component.InputPadrao
 import com.avanade.carteiradigital.presentation.component.LinkLaranja
 import com.avanade.carteiradigital.presentation.intent.LoginIntent
 import com.avanade.carteiradigital.presentation.viewmodel.LoginViewModel
+import com.avanade.carteiradigital.ui.theme.Azul
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.CinzaAzulado
 import org.koin.androidx.compose.koinViewModel
@@ -123,7 +124,7 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .padding(top = dimensionResource(id = R.dimen.spacing_medium)),
                 textAlign = TextAlign.End,
-                color = Color.Blue
+                color = Azul
             )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
             BotaoLaranja(
