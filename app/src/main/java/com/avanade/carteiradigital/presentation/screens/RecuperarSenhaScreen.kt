@@ -102,7 +102,7 @@ fun DadosMaisVoltarRecuperarSenha() {
             label = stringResource(id = R.string.email),
             modifier = Modifier,
             placeholder = stringResource(id = R.string.seu_email),
-            value = "",
+            texto = "",
             onValueChange = {}
         )
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))

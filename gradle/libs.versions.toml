@@ -9,6 +9,8 @@ activityCompose = "1.13.0"
 kotlin = "2.2.10"
 composeBom = "2026.02.01"
 
+koin = "4.1.0"
+
 kotlinSerialization = "1.7.3" #2.0.21
 navigationCompose = "2.10.1"
 runtime = "1.12.1"
@@ -37,6 +39,9 @@ androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime
 
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
+
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 
 
 [plugins]
