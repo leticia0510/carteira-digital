@@ -26,6 +26,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,15 +40,48 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.avanade.carteiradigital.R
+import com.avanade.carteiradigital.Screen
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
 import com.avanade.carteiradigital.presentation.component.InputPadrao
 import com.avanade.carteiradigital.presentation.component.LinkLaranja
+import com.avanade.carteiradigital.presentation.intent.LoginIntent
+import com.avanade.carteiradigital.presentation.viewmodel.LoginViewModel
+import com.avanade.carteiradigital.ui.theme.Azul
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.CinzaAzulado
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navController: NavController
+) {
+
+    val loginViewModel: LoginViewModel = koinViewModel()
+
+    val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.loginSucesso) {
+
+        if (uiState.loginSucesso){
+            navController.navigate(Screen.Home) {
+
+                popUpTo(Screen.Login) {
+                    inclusive = true
+                }
+
+                launchSingleTop = true
+
+                loginViewModel.onIntent(
+                    LoginIntent.LoginSuccessHandled
+                )
+            }
+        }
+    }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +94,48 @@ fun LoginScreen() {
         }
         item {
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_extra_large)))
-            AcessoUsuario()
+            InputPadrao(
+                label = stringResource(id = R.string.email),
+                modifier = Modifier,
+                placeholder = stringResource(id = R.string.email),
+                texto = uiState.email,
+                onValueChange = {
+                    loginViewModel.onIntent(
+                        LoginIntent.EmailChanged(it)
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
+            InputPadrao(
+                label = stringResource(id = R.string.senha),
+                modifier = Modifier,
+                placeholder = stringResource(id = R.string.senha),
+                texto = uiState.senha,
+                onValueChange = {
+                    loginViewModel.onIntent(
+                        LoginIntent.SenhaChanged(it)
+                    )
+                }
+            )
+            Text(
+                text = stringResource(id = R.string.esqueceu_senha),
+                fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = dimensionResource(id = R.dimen.spacing_medium)),
+                textAlign = TextAlign.End,
+                color = Azul
+            )
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
+            BotaoLaranja(
+                onClick = {
+                    loginViewModel.onIntent(
+                        LoginIntent.LoginClicked
+                    )
+                },
+                modifier = Modifier,
+                text = stringResource(id = R.string.entrar)
+            )
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
         }
         item {
@@ -88,40 +165,6 @@ fun CabecalhoLogin() {
             fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp
         )
     }
-}
-
-@Composable
-fun AcessoUsuario() {
-    InputPadrao(
-        label = stringResource(id = R.string.email),
-        modifier = Modifier,
-        placeholder = stringResource(id = R.string.email),
-        value = "",
-        onValueChange = {}
-    )
-    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
-    InputPadrao(
-        label = stringResource(id = R.string.senha),
-        modifier = Modifier,
-        placeholder = stringResource(id = R.string.senha),
-        value = "",
-        onValueChange = {}
-    )
-    Text(
-        text = stringResource(id = R.string.esqueceu_senha),
-        fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = dimensionResource(id = R.dimen.spacing_medium)),
-        textAlign = TextAlign.End,
-        color = Color.Blue
-    )
-    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
-    BotaoLaranja(
-        onClick = { /* Ação ao clicar no botão */ },
-        modifier = Modifier,
-        text = stringResource(id = R.string.entrar)
-    )
 }
 
 @Composable
@@ -187,5 +230,6 @@ fun LinkParaCadastro() {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen( navController = rememberNavController() )
+
 }

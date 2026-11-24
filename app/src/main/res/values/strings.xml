@@ -39,4 +39,20 @@
     <string name="informe_email">Informe seu e-mail para receber as instruções</string>
     <string name="enviar_instrucoes">Enviar instruções</string>
     <string name="voltar_para_login">Voltar para o login</string>
+    <string name="extrato">Extrato</string>
+    <string name="buscar_transacoes">Buscar transações</string>
+    <string name="todos">Todos</string>
+    <string name="entradas">Entradas</string>
+    <string name="saidas">Saídas</string>
+    <string name="transferencia">Transferência</string>
+    <string name="conta_destino">Conta de destino</string>
+    <string name="chave_pix">Chave Pix</string>
+    <string name="agencia_conta">Agência e Conta</string>
+    <string name="contato">Contato</string>
+    <string name="digite_a_chave_pix">Digite a chave Pix</string>
+    <string name="valor">Valor</string>
+    <string name="rs">R$ 0,00</string>
+    <string name="descricao">Descrição (opcional)</string>
+    <string name="exemplo">Ex: Almoço, Maria, etc.</string>
+    <string name="continuar">Continuar</string>
 </resources>

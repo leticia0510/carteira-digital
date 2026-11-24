@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.avanade.carteiradigital.R
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
 import com.avanade.carteiradigital.presentation.component.InputPadrao
+import com.avanade.carteiradigital.ui.theme.Azul
 import com.avanade.carteiradigital.ui.theme.Branco
 import com.avanade.carteiradigital.ui.theme.BrancoAzulado
 
@@ -77,7 +78,7 @@ fun BoxRecuperarSenha() {
             Image(
                 painter = painterResource(id = R.drawable.envelope),
                 contentDescription = "Envenlope",
-                modifier = Modifier.size(dimensionResource(id = R.dimen.logo_nome_avanade_height))
+                modifier = Modifier.size(dimensionResource(id = R.dimen.logo_medium))
             )
         }
         Text(
@@ -102,7 +103,7 @@ fun DadosMaisVoltarRecuperarSenha() {
             label = stringResource(id = R.string.email),
             modifier = Modifier,
             placeholder = stringResource(id = R.string.seu_email),
-            value = "",
+            texto = "",
             onValueChange = {}
         )
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
@@ -115,7 +116,7 @@ fun DadosMaisVoltarRecuperarSenha() {
         Text(
             text = stringResource(id = R.string.voltar_para_login),
             fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
-            color = Color.Blue,
+            color = Azul,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier

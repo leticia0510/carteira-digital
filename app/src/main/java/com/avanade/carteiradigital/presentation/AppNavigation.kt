@@ -100,7 +100,7 @@ fun AppNavigation() {
             }
 
             composable<Screen.Login> {
-                LoginScreen()
+                LoginScreen(navController)
             }
 
             composable<Screen.Cadastro> {

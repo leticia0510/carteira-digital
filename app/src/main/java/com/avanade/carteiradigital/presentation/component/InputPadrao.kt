@@ -26,7 +26,7 @@ fun InputPadrao(
     label: String,
     placeholder: String,
     modifier: Modifier,
-    value: String,
+    texto: String,
     onValueChange: (String) -> Unit
 ) {
     Column(
@@ -38,7 +38,7 @@ fun InputPadrao(
             modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.spacing_small))
         )
         TextField(
-            value = value,
+            value = texto,
             onValueChange = onValueChange,
             placeholder = { Text(text = placeholder) },
             modifier = Modifier

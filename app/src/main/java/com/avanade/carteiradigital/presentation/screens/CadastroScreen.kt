@@ -99,7 +99,7 @@ fun CadastroUsuario() {
         label = stringResource(id = R.string.nome_completo),
         modifier = Modifier,
         placeholder = stringResource(id = R.string.seu_nome),
-        value = "",
+        texto = "",
         onValueChange = {}
     )
     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
@@ -107,7 +107,7 @@ fun CadastroUsuario() {
         label = stringResource(id = R.string.email),
         modifier = Modifier,
         placeholder = stringResource(id = R.string.seu_email),
-        value = "",
+        texto = "",
         onValueChange = {}
     )
     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
@@ -115,7 +115,7 @@ fun CadastroUsuario() {
         label = stringResource(id = R.string.senha),
         modifier = Modifier,
         placeholder = stringResource(id = R.string.minimo_8_caracteres),
-        value = "",
+        texto = "",
         onValueChange = {}
     )
     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
