@@ -227,9 +227,3 @@ fun LinkParaCadastro() {
     }
 }
 
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen( navController = rememberNavController() )
-
-}
