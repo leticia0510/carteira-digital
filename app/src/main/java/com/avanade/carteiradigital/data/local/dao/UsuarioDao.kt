@@ -9,13 +9,16 @@ import com.avanade.carteiradigital.data.local.entity.UsuarioEntity
 @Dao
 interface UsuarioDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun criarUsuario(usuario: UsuarioEntity)
 
+    @Query("SELECT * FROM usuarios WHERE email = :email LIMIT 1")
+    suspend fun buscarUsuarioPorEmail(email: String): UsuarioEntity?
+
     @Query("""
-    SELECT * FROM usuarios 
-    WHERE email = :email AND senha = :senha
-""")
+        SELECT * FROM usuarios
+        WHERE email = :email AND senha = :senha
+    """)
     suspend fun login(
         email: String,
         senha: String
@@ -23,5 +26,4 @@ interface UsuarioDao {
 
     @Query("SELECT * FROM usuarios WHERE id = :id")
     suspend fun getUsuarioPorId(id: String): UsuarioEntity?
-
 }

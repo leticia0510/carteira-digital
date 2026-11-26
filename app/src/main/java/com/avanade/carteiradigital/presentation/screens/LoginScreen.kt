@@ -3,6 +3,7 @@ package com.avanade.carteiradigital.presentation.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,7 @@ import com.avanade.carteiradigital.Screen
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
 import com.avanade.carteiradigital.presentation.component.InputPadrao
 import com.avanade.carteiradigital.presentation.component.LinkLaranja
+import com.avanade.carteiradigital.presentation.effect.LoginEffect
 import com.avanade.carteiradigital.presentation.intent.LoginIntent
 import com.avanade.carteiradigital.presentation.viewmodel.LoginViewModel
 import com.avanade.carteiradigital.ui.theme.Azul
@@ -63,6 +65,23 @@ fun LoginScreen(
     val loginViewModel: LoginViewModel = koinViewModel()
 
     val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+
+        loginViewModel.effect.collect { effect ->
+
+            when (effect) {
+
+                LoginEffect.NavigateToCadastro -> {
+                    navController.navigate(Screen.Cadastro)
+                }
+
+                LoginEffect.NavigateToRecuperarSenha -> {
+                    navController.navigate(Screen.RecuperarSenha)
+                }
+            }
+        }
+    }
 
     LaunchedEffect(uiState.loginSucesso) {
 
@@ -122,7 +141,12 @@ fun LoginScreen(
                 fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = dimensionResource(id = R.dimen.spacing_medium)),
+                    .padding(top = dimensionResource(id = R.dimen.spacing_medium))
+                    .clickable {
+                        loginViewModel.onIntent(
+                            LoginIntent.EsqueceuSenhaClicked
+                        )
+                    },
                 textAlign = TextAlign.End,
                 color = Azul
             )
@@ -141,7 +165,13 @@ fun LoginScreen(
         item {
             OutraOpcaoEntrada()
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_extra_large)))
-            LinkParaCadastro()
+            LinkParaCadastro(
+                onCadastroClick = {
+                    loginViewModel.onIntent(
+                        LoginIntent.CadastroClicked
+                    )
+                }
+            )
         }
     }
 }
@@ -209,7 +239,9 @@ fun OutraOpcaoEntrada() {
 }
 
 @Composable
-fun LinkParaCadastro() {
+fun LinkParaCadastro(
+    onCadastroClick: () -> Unit
+) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
@@ -217,10 +249,13 @@ fun LinkParaCadastro() {
     ) {
         Text(
             text = stringResource(id = R.string.nao_tem_conta),
-            fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp
+            fontSize = dimensionResource(
+                id = R.dimen.text_size_large
+            ).value.sp
         )
+
         LinkLaranja(
-            onClick = { /* Ação ao clicar no link */ },
+            onClick = onCadastroClick,
             modifier = Modifier,
             text = stringResource(id = R.string.cadastre_se)
         )
