@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -20,19 +22,63 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.avanade.carteiradigital.R
+import com.avanade.carteiradigital.Screen
 import com.avanade.carteiradigital.presentation.component.BotaoLaranja
 import com.avanade.carteiradigital.presentation.component.LinkLaranja
+import com.avanade.carteiradigital.presentation.intent.SplashIntent
+import com.avanade.carteiradigital.presentation.viewmodel.SplashViewModel
 import com.avanade.carteiradigital.ui.theme.Branco
+import org.koin.androidx.compose.koinViewModel
+
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(
+    navController: NavController
+) {
+
+    val splashViewModel: SplashViewModel = koinViewModel()
+
+    val uiState by splashViewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(
+        uiState.navegarParaLogin,
+        uiState.navegarParaComecar
+    ) {
+
+        when {
+            uiState.navegarParaLogin -> {
+                navController.navigate(Screen.Login) {
+                    popUpTo(Screen.Splash) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+
+                splashViewModel.onIntent(
+                    SplashIntent.NavegacaoHandled
+                )
+            }
+
+            uiState.navegarParaComecar -> {
+                navController.navigate(Screen.Login) {
+                    popUpTo(Screen.Splash) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+
+                splashViewModel.onIntent(
+                    SplashIntent.NavegacaoHandled
+                )
+            }
+        }
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
+
         Image(
             painter = painterResource(id = R.drawable.tela_de_fundo),
             contentDescription = null,
@@ -46,11 +92,25 @@ fun SplashScreen(navController: NavController) {
                 .padding(dimensionResource(id = R.dimen.spacing_large)),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+
             IntroducaoSplash()
-            DirecaoSplash()
+
+            DirecaoSplash(
+                onComecarClick = {
+                    splashViewModel.onIntent(
+                        SplashIntent.ComecarClicked
+                    )
+                },
+                onEntrarClick = {
+                    splashViewModel.onIntent(
+                        SplashIntent.EntrarClicked
+                    )
+                }
+            )
         }
     }
 }
+
 
 @Composable
 fun IntroducaoSplash() {
@@ -93,34 +153,50 @@ fun IntroducaoSplash() {
     }
 }
 
+
 @Composable
-fun DirecaoSplash() {
+fun DirecaoSplash(
+    onComecarClick: () -> Unit,
+    onEntrarClick: () -> Unit
+) {
     Column(
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = dimensionResource(id = R.dimen.spacing_extra_large))
+            .padding(
+                bottom = dimensionResource(
+                    id = R.dimen.spacing_extra_large
+                )
+            )
     ) {
+
         BotaoLaranja(
-            onClick = { /* Ação ao clicar no botão */ },
+            onClick = onComecarClick,
             modifier = Modifier,
             text = stringResource(id = R.string.comecar)
         )
+
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = dimensionResource(id = R.dimen.spacing_medium))
+                .padding(
+                    top = dimensionResource(id = R.dimen.spacing_medium)
+                )
         ) {
+
             Text(
                 text = stringResource(id = R.string.ja_tem_uma_conta),
                 color = Branco,
-                fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
+                fontSize = dimensionResource(
+                    id = R.dimen.text_size_large
+                ).value.sp
             )
+
             LinkLaranja(
-                onClick = { /* Ação ao clicar no link */ },
+                onClick = onEntrarClick,
                 modifier = Modifier,
                 text = stringResource(id = R.string.entrar)
             )
@@ -128,8 +204,3 @@ fun DirecaoSplash() {
     }
 }
 
-@Preview
-@Composable
-fun SplashScreenPreview() {
-    SplashScreen(navController = rememberNavController())
-}
