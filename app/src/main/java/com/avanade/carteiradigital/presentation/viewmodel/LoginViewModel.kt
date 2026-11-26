@@ -1,15 +1,16 @@
 package com.avanade.carteiradigital.presentation.viewmodel
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.avanade.carteiradigital.domain.model.Usuario
 import com.avanade.carteiradigital.domain.usecase.LoginUseCase
+import com.avanade.carteiradigital.presentation.effect.LoginEffect
 import com.avanade.carteiradigital.presentation.intent.LoginIntent
 import com.avanade.carteiradigital.presentation.uistate.LoginUiState
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -20,48 +21,54 @@ class LoginViewModel(
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
+    private val _effect = Channel<LoginEffect>()
+    val effect = _effect.receiveAsFlow()
 
     fun onIntent(intent: LoginIntent) {
 
-        when(intent) {
+        when (intent) {
 
-            is LoginIntent.EmailChanged ->{
+            is LoginIntent.EmailChanged -> {
                 _uiState.update {
-                    it.copy(
-                        email = intent.email,
-                        erro = null
-                    )
+                    it.copy(email = intent.email, erro = null)
                 }
             }
 
-            is LoginIntent.SenhaChanged ->{
+            is LoginIntent.SenhaChanged -> {
                 _uiState.update {
-                    it.copy(
-                        senha = intent.senha,
-                        erro = null
-                    )
+                    it.copy(senha = intent.senha, erro = null)
                 }
             }
 
-            is LoginIntent.LoginClicked ->{
+            is LoginIntent.LoginClicked -> {
                 login()
             }
 
-            is LoginIntent.ErrorShown ->{
+            is LoginIntent.EsqueceuSenhaClicked -> {
+                sendEffect(LoginEffect.NavigateToRecuperarSenha)
+            }
+
+            is LoginIntent.CadastroClicked -> {
+                sendEffect(LoginEffect.NavigateToCadastro)
+            }
+
+            is LoginIntent.ErrorShown -> {
                 _uiState.update {
-                    it.copy(
-                        erro = null
-                    )
+                    it.copy(erro = null)
                 }
             }
 
-            is LoginIntent.LoginSuccessHandled ->{
+            is LoginIntent.LoginSuccessHandled -> {
                 _uiState.update {
-                    it.copy(
-                        loginSucesso = false
-                    )
+                    it.copy(loginSucesso = false)
                 }
             }
+        }
+    }
+
+    private fun sendEffect(effect: LoginEffect) {
+        viewModelScope.launch {
+            _effect.send(effect)
         }
     }
 

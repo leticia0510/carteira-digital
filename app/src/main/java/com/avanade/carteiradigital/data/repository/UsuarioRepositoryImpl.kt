@@ -21,6 +21,19 @@ class UsuarioRepositoryImpl(
         )
     }
 
+    override suspend fun buscarUsuarioPorEmail(email: String): Usuario? {
+
+        return usuarioDao.buscarUsuarioPorEmail(email)?.let { entity ->
+
+            Usuario(
+                id = entity.id,
+                nome = entity.nome,
+                email = entity.email,
+                senha = entity.senha
+            )
+        }
+    }
+
     override suspend fun login(email: String, senha: String): Usuario? {
 
         return usuarioDao.login(email, senha)?.let { entity ->

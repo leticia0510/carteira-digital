@@ -25,6 +25,7 @@ import com.avanade.carteiradigital.presentation.screens.CadastroScreen
 import com.avanade.carteiradigital.presentation.screens.ExtratoScreen
 import com.avanade.carteiradigital.presentation.screens.HomeScreen
 import com.avanade.carteiradigital.presentation.screens.LoginScreen
+import com.avanade.carteiradigital.presentation.screens.RecuperarSenhaScreen
 import com.avanade.carteiradigital.presentation.screens.SplashScreen
 import kotlinx.serialization.Serializable
 import kotlin.collections.forEach
@@ -52,6 +53,9 @@ sealed class Screen{
 
     @Serializable
     object Extrato : Screen()
+
+    @Serializable
+    object RecuperarSenha : Screen()
 
 }
 
@@ -104,7 +108,7 @@ fun AppNavigation() {
             }
 
             composable<Screen.Cadastro> {
-                CadastroScreen()
+                CadastroScreen(navController)
             }
 
             composable<Screen.Home> {
@@ -113,6 +117,10 @@ fun AppNavigation() {
 
             composable<Screen.Extrato> {
                 ExtratoScreen()
+            }
+
+            composable<Screen.RecuperarSenha> {
+                RecuperarSenhaScreen()
             }
 
         }
